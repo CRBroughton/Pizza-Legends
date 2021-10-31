@@ -4,7 +4,7 @@ import Overworld from "./Overworld.js"
     console.log('Initialised Game...');
 
     const overworld = new Overworld({
-        element: document.querySelector(".game-container")
+        element: document.querySelector(".game-container")!
     })
 
     overworld.init()
