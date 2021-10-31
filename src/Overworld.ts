@@ -19,6 +19,23 @@ export default class Overworld {
 
         const x = 5;
         const y = 6;
+
+        const shadow = new Image();
+
+        shadow.onload = () => {
+            this.ctx.drawImage(
+                shadow,
+                0, // left cut
+                0, // top cut
+                32,  // width of cut
+                32, // height of cut
+                x * 16 - 8, // cut compenstation
+                y * 16 - 18, 
+                32, // width and height of hero
+                32)
+        }
+        shadow.src = "images/characters/shadow.png"
+
         const hero = new Image();
         hero.onload = () => {
             this.ctx.drawImage(
