@@ -1,3 +1,5 @@
+import GameObject from './GameObject'
+
 export default class OverworldMap {
   constructor(config) {
     this.gameObjects = config.gameObjects
@@ -24,6 +26,10 @@ window.OverworldMaps = {
     upperSrc: 'images/maps/DemoUpper.png',
     gameObjects: {
       hero: new GameObject({
+        x: 5,
+        y: 6,
+      }),
+      npc1: new GameObject({
         x: 5,
         y: 6,
       }),
