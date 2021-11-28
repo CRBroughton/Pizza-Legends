@@ -14,6 +14,7 @@ export default class Overworld {
 
   startGameLoop() {
     const step = () => {
+      // Clears the canvas
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
       // Draws map lower image
       this.map.drawLowerImage(this.ctx)
