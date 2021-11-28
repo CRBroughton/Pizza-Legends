@@ -31,6 +31,7 @@ window.OverworldMaps = {
     upperSrc: 'images/maps/DemoUpper.png',
     gameObjects: {
       hero: new Person({
+        isPlayerControlled: true,
         x: utils.withGrid(5),
         y: utils.withGrid(6),
       }),
