@@ -9,6 +9,16 @@ export default class Sprite {
             this.isLoaded = true;
         }
 
+        // Shadows
+        this.shadow = new Image();
+        this.useShadow = true;
+        if (this.useShadow) {
+            this.shadow.src = "images/characters/shadow.png";
+        }
+        this.shadow.onload = () => {
+            this.isShadowsLoaded = true;
+        }
+
         // Configuring Animation & animation state
         this.animations = config.animations || {
             idleDown: [
