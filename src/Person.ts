@@ -7,6 +7,8 @@ export default class Person extends GameObject {
     super(config)
     this.movingProgressRemaining = 0
 
+    this.isPlayerControlled = config.isPlayerControlled || false
+
     this.directionUpdate = {
       up: ['y', -1],
       down: ['y', 1],
@@ -17,6 +19,12 @@ export default class Person extends GameObject {
 
   update(state) {
     this.updatePosition()
+
+    if (this.isPlayerControlled && this.movingProgressRemaining === 0 && state.key) {
+      // Moves direction
+      this.direction = state.key
+      this.movingProgressRemaining = 16
+    }
   }
 
   updatePosition() {
