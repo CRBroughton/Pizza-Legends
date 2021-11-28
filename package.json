@@ -1,0 +1,27 @@
+{
+  "name": "pizza-legends",
+  "version": "1.0.0",
+  "description": "",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "typewatch": "npx tsc -w",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CRBroughton/Pizza-Legends.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CRBroughton/Pizza-Legends/issues"
+  },
+  "homepage": "https://github.com/CRBroughton/Pizza-Legends#readme",
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.11.1",
+    "eslint": "^8.3.0",
+    "typescript": "^4.5.2"
+  }
+}
