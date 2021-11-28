@@ -15,6 +15,10 @@ export default class Person extends GameObject {
     }
   }
 
+  update(state) {
+    this.updatePosition()
+  }
+
   updatePosition() {
     if (this.movingProgressRemaining > 0) {
       const [property, change] = this.directionUpdate[this.direction]
