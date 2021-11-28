@@ -1,5 +1,6 @@
 import { utils } from './utils.js'
 import GameObject from './GameObject.js'
+import Person from './Person.js'
 
 export default class OverworldMap {
   gameObjects: GameObject
@@ -29,11 +30,11 @@ window.OverworldMaps = {
     lowerSrc: 'images/maps/DemoLower.png',
     upperSrc: 'images/maps/DemoUpper.png',
     gameObjects: {
-      hero: new GameObject({
+      hero: new Person({
         x: utils.withGrid(5),
         y: utils.withGrid(6),
       }),
-      npc1: new GameObject({
+      npc1: new Person({
         x: utils.withGrid(7),
         y: utils.withGrid(9),
       }),
