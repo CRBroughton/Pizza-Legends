@@ -14,6 +14,16 @@ export default class Overworld {
 
   startGameLoop() {
     const step = () => {
+      // Draws map lower image
+      this.map.drawLowerImage(this.ctx)
+
+      // Draws game objects
+      Object.values(this.map.gameObjects).forEach((object) => {
+        object.sprite.draw(this.ctx)
+      })
+
+      // Draws map upper image
+      this.map.drawUpperImage(this.ctx)
       requestAnimationFrame(() => {
         step()
       })
