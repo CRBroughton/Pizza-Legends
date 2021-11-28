@@ -1,7 +1,10 @@
 import GameObject from './GameObject.js'
 
 export default class OverworldMap {
-  constructor(config) {
+  gameObjects: GameObject
+  lowerImage: HTMLImageElement
+  upperImage: HTMLImageElement
+  constructor(config: { gameObjects: GameObject; lowerSrc: string; upperSrc: string }) {
     this.gameObjects = config.gameObjects
 
     this.lowerImage = new Image()
@@ -11,11 +14,11 @@ export default class OverworldMap {
     this.upperImage.src = config.upperSrc
   }
 
-  drawLowerImage(ctx) {
+  drawLowerImage(ctx: CanvasRenderingContext2D) {
     ctx.drawImage(this.lowerImage, 0, 0)
   }
 
-  drawUpperImage(ctx) {
+  drawUpperImage(ctx: CanvasRenderingContext2D) {
     ctx.drawImage(this.upperImage, 0, 0)
   }
 }
