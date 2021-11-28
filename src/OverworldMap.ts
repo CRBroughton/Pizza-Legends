@@ -30,8 +30,8 @@ window.OverworldMaps = {
         y: 6,
       }),
       npc1: new GameObject({
-        x: 5,
-        y: 6,
+        x: 7,
+        y: 9,
       }),
     },
   },
