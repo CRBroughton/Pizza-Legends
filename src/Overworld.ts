@@ -6,6 +6,7 @@ export default class Overworld {
   canvas: HTMLCanvasElement
   ctx: CanvasRenderingContext2D
   map: OverworldMap
+  directionInput: DirectionInput | undefined
   constructor(config: { element: HTMLDivElement }) {
     this.element = config.element
     this.canvas = this.element.querySelector('.game-canvas')!
@@ -23,7 +24,7 @@ export default class Overworld {
       // Draws game objects
       Object.values(this.map.gameObjects).forEach((object) => {
         object.update({
-          key: this.directionInput.direction,
+          key: this.directionInput?.direction,
         })
         object.sprite.draw(this.ctx)
       })
