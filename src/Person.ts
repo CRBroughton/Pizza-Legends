@@ -1,5 +1,4 @@
-import GameObject from './GameObject.js'
-
+import GameObject from '@/GameObject.js'
 export default class Person extends GameObject {
   movingProgressRemaining: number
 

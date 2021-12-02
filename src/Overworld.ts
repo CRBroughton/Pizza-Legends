@@ -1,5 +1,5 @@
-import DirectionInput from './DirectionInput.js'
-import OverworldMap from './OverworldMap.js'
+import DirectionInput from '@/DirectionInput.js'
+import OverworldMap from '@/OverworldMap.js'
 
 export default class Overworld {
   element: HTMLDivElement

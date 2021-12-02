@@ -1,3 +1,6 @@
+import GameObject from '@/GameObject.js'
+import { drawImage } from '@/interfaces/Sprite'
+
 export default class Sprite {
   image: HTMLImageElement
   constructor(config) {

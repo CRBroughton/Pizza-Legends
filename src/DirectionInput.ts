@@ -1,3 +1,4 @@
+import { map } from '@/interfaces/DirectionInput'
 export default class DirectionInput {
   heldDirections: string[]
   constructor() {
