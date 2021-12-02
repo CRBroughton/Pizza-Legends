@@ -51,6 +51,14 @@ export default class Sprite {
     return this.animations[this.currentAnimation][this.currentAnimationFrame]
   }
 
+  setAnimation(key) {
+    if (this.currentAnimation != key) {
+      this.currentAnimation = key
+      this.currentAnimationFrame = 0
+      this.animationFrameProgress = this.animationFrameLimit
+    }
+  }
+
   updateAnimationProgress() {
     // downtick frame progress
     if (this.animationFrameProgress > 0) {
