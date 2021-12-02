@@ -1,8 +1,8 @@
-import Sprite from './Sprite.js'
+import Sprite from '@/Sprite.js'
 
 export default class GameObject {
-  x: any
-  y: any
+  x: number
+  y: number
   direction: string
   sprite: Sprite
   constructor(config: { x: number; y: number; direction: string; src?: string }) {
@@ -13,9 +13,5 @@ export default class GameObject {
       gameObject: this,
       src: config.src || 'images/characters/people/hero.png',
     })
-  }
-
-  update() {
-
   }
 }

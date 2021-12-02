@@ -1,9 +1,10 @@
-import GameObject from './GameObject.js'
-
+import GameObject from '@/GameObject.js'
 export default class Person extends GameObject {
   movingProgressRemaining: number
+  isPlayerControlled: boolean
+  directionUpdate: { up: (string | number)[]; down: (string | number)[]; left: (string | number)[]; right: (string | number)[] }
 
-  constructor(config) {
+  constructor(config: any) {
     super(config)
     this.movingProgressRemaining = 0
 
@@ -17,7 +18,7 @@ export default class Person extends GameObject {
     }
   }
 
-  update(state) {
+  update(state: { key: string }) {
     this.updatePosition()
 
     if (this.isPlayerControlled && this.movingProgressRemaining === 0 && state.key) {
@@ -29,7 +30,7 @@ export default class Person extends GameObject {
 
   updatePosition() {
     if (this.movingProgressRemaining > 0) {
-      const [property, change] = this.directionUpdate[this.direction]
+      const [property, change]: [string, number] = this.directionUpdate[this.direction]
       this[property] += change
       this.movingProgressRemaining -= 1
     }

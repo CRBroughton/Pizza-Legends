@@ -1,4 +1,4 @@
-import Overworld from './Overworld.js'
+import Overworld from '@/Overworld.js'
 
 (function() {
   // eslint-disable-next-line no-console

@@ -1,6 +1,6 @@
-import { utils } from './utils.js'
-import GameObject from './GameObject.js'
-import Person from './Person.js'
+import { utils } from '@/utils.js'
+import GameObject from '@/GameObject.js'
+import Person from '@/Person.js'
 
 export default class OverworldMap {
   gameObjects: GameObject
