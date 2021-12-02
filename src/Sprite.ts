@@ -28,11 +28,11 @@ export default class Sprite {
 
     // Configuring Animation & animation state
     this.animations = config.animations || {
-      idleDown: [
-        [0, 0],
-      ],
+      'idle-down': [[0, 0]],
+      'walk-down': [[1, 0], [0, 0], [3, 0], [0, 0]],
+
     }
-    this.currentAnimation = config.currentAnimation || 'idleDown'
+    this.currentAnimation = config.currentAnimation || 'idle-down'
     this.currentAnimationFrame = 0
 
     // Reference the game object
