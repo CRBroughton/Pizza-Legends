@@ -31,7 +31,7 @@ export default class Sprite {
       idleDown: [
         [0, 0],
       ],
-    },
+    }
     this.currentAnimation = config.currentAnimation || 'idleDown'
     this.currentAnimationFrame = 0
 
