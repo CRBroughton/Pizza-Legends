@@ -1,3 +1,4 @@
+import { utils } from '@/utils.js'
 import GameObject from '@/GameObject.js'
 import { drawImage } from '@/interfaces/Sprite'
 
@@ -74,9 +75,9 @@ export default class Sprite {
       this.currentAnimationFrame = 0
   }
 
-  draw(ctx: { drawImage: drawImage}) {
-    const x = this.gameObject.x - 8
-    const y = this.gameObject.y - 18
+  draw(ctx: { drawImage: drawImage}, cameraPerson) {
+    const x = this.gameObject.x - 8 + utils.withGrid(10.5) - cameraPerson.x
+    const y = this.gameObject.y - 18 + utils.withGrid(6) - cameraPerson.y
 
     this.isShadowsLoaded && ctx.drawImage(this.shadow, x, y)
 
