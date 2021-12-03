@@ -1,4 +1,4 @@
-export interface config {
+export interface Config {
   isPlayerControlled?: boolean
   x?: number
   y?: number
@@ -6,7 +6,7 @@ export interface config {
   src?: string | undefined
 }
 
-export interface directionUpdate {
+export interface DirectionUpdate {
   up: [string, number]
   down: [string, number]
   left: [string, number]

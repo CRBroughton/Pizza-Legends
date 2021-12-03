@@ -1,11 +1,11 @@
-export interface config {
+export interface Config {
   x: number
   y: number
   direction: string
   src?: string
 }
 
-export type addWall = (
+export type AddWall = (
   x: number,
   y: number
 ) => void

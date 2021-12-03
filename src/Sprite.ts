@@ -1,6 +1,6 @@
 import { utils } from '@/utils.js'
 import GameObject from '@/GameObject.js'
-import { drawImage } from '@/types/Sprite'
+import { DrawImage } from '@/types/Sprite'
 
 export default class Sprite {
   image: HTMLImageElement
@@ -75,7 +75,7 @@ export default class Sprite {
       this.currentAnimationFrame = 0
   }
 
-  draw(ctx: { drawImage: drawImage}, cameraPerson) {
+  draw(ctx: { drawImage: DrawImage}, cameraPerson) {
     const x = this.gameObject.x - 8 + utils.withGrid(10.5) - cameraPerson.x
     const y = this.gameObject.y - 18 + utils.withGrid(6) - cameraPerson.y
 

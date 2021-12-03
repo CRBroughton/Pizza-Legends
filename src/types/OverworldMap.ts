@@ -1,31 +1,25 @@
 import GameObject from '@/GameObject.js'
 
-export interface config {
+export interface Config {
   gameObjects: GameObject
   walls: {}
   lowerSrc: string
   upperSrc: string
 }
 
-export interface cameraPerson {
+export interface CameraPerson {
   x: number
   y: number
 }
 
-export type isSpaceTaken = (
+export type IsSpaceTaken = (
   currentX: number,
   currentY: number,
   direction: string,
 ) => boolean
 
-export type wall = (
+export type Wall = (
   wasX: number,
   wasY: number,
   direction?: string,
 ) => void
-
-export type takenSpace = (
-  x: number,
-  y: number,
-  direction: string | undefined,
-) => { x: number; y: number }

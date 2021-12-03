@@ -1,7 +1,7 @@
 import { utils, nextPosition } from '@/utils.js'
 import GameObject from '@/GameObject.js'
 import Person from '@/Person.js'
-import { config, cameraPerson, isSpaceTaken, wall } from '@/types/OverworldMap'
+import { Config, CameraPerson, IsSpaceTaken, Wall } from '@/types/OverworldMap'
 
 export default class OverworldMap {
   gameObjects: GameObject
@@ -9,7 +9,7 @@ export default class OverworldMap {
   upperImage: HTMLImageElement
   walls: {[key: string]: boolean}
 
-  constructor(config: config) {
+  constructor(config: Config) {
     this.gameObjects = config.gameObjects
     this.walls = config.walls || {}
 
@@ -20,15 +20,15 @@ export default class OverworldMap {
     this.upperImage.src = config.upperSrc
   }
 
-  drawLowerImage(ctx: CanvasRenderingContext2D, cameraPerson: cameraPerson) {
+  drawLowerImage(ctx: CanvasRenderingContext2D, cameraPerson: CameraPerson) {
     ctx.drawImage(this.lowerImage, utils.withGrid(10.5) - cameraPerson.x, utils.withGrid(6) - cameraPerson.y)
   }
 
-  drawUpperImage(ctx: CanvasRenderingContext2D, cameraPerson: cameraPerson) {
+  drawUpperImage(ctx: CanvasRenderingContext2D, cameraPerson: CameraPerson) {
     ctx.drawImage(this.upperImage, utils.withGrid(10.5) - cameraPerson.x, utils.withGrid(6) - cameraPerson.y)
   }
 
-  isSpaceTaken: isSpaceTaken = (currentX, currentY, direction) => {
+  isSpaceTaken: IsSpaceTaken = (currentX, currentY, direction) => {
     const { x, y } = nextPosition(currentX, currentY, direction)
     return this.walls[`${x},${y}`] || false
   }
@@ -40,15 +40,15 @@ export default class OverworldMap {
     })
   }
 
-  addWall: wall = (x, y) => {
+  addWall: Wall = (x, y) => {
     this.walls[`${x},${y}`] = true
   }
 
-  removeWall: wall = (x, y) => {
+  removeWall: Wall = (x, y) => {
     delete this.walls[`${x},${y}`]
   }
 
-  moveWall: wall = (wasX, wasY, direction) => {
+  moveWall: Wall = (wasX, wasY, direction) => {
     this.removeWall(wasX, wasY)
     const { x, y } = nextPosition(wasX, wasY, direction)
     this.addWall(x, y)

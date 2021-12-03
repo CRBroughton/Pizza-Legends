@@ -1,4 +1,8 @@
-import { takenSpace } from '@/types/OverworldMap'
+type Position = (
+  x: number,
+  y: number,
+  direction: string | undefined,
+) => { x: number; y: number }
 
 export const utils = {
   withGrid(n: number) {
@@ -9,7 +13,7 @@ export const utils = {
   },
 }
 
-export const nextPosition: takenSpace = (initialX, initialY, direction) => {
+export const nextPosition: Position = (initialX, initialY, direction) => {
   let x = initialX
   let y = initialY
   const size = 16

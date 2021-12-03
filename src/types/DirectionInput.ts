@@ -1,4 +1,4 @@
-export interface map {
+export interface Map {
   KeyW: string
   KeyA: string
   KeyS: string
