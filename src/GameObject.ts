@@ -1,5 +1,5 @@
 import Sprite from '@/Sprite.js'
-import { addWall } from '@/interfaces/GameObject'
+import { config, addWall } from '@/interfaces/GameObject'
 
 export default class GameObject {
   x: number
@@ -7,7 +7,7 @@ export default class GameObject {
   direction: string
   sprite: Sprite
   isMounted: boolean
-  constructor(config: { x: number; y: number; direction: string; src?: string }) {
+  constructor(config: config) {
     this.isMounted = false
     this.x = config.x || 0
     this.y = config.y || 0
