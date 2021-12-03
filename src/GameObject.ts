@@ -1,5 +1,5 @@
 import Sprite from '@/Sprite.js'
-import { config, addWall } from '@/interfaces/GameObject'
+import { config, addWall } from '@/types/GameObject'
 
 export default class GameObject {
   x: number

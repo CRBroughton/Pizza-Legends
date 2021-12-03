@@ -1,4 +1,4 @@
-import { map } from '@/interfaces/DirectionInput'
+import { map } from '@/types/DirectionInput'
 export default class DirectionInput {
   heldDirections: string[]
   map: map

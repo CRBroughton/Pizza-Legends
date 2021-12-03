@@ -1,4 +1,4 @@
-import { takenSpace } from '@/interfaces/OverworldMap'
+import { takenSpace } from '@/types/OverworldMap'
 
 export const utils = {
   withGrid(n: number) {

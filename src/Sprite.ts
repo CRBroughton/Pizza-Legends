@@ -1,6 +1,6 @@
 import { utils } from '@/utils.js'
 import GameObject from '@/GameObject.js'
-import { drawImage } from '@/interfaces/Sprite'
+import { drawImage } from '@/types/Sprite'
 
 export default class Sprite {
   image: HTMLImageElement

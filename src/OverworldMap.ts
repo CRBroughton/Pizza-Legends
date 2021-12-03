@@ -1,7 +1,7 @@
 import { utils, nextPosition } from '@/utils.js'
 import GameObject from '@/GameObject.js'
 import Person from '@/Person.js'
-import { config, cameraPerson, isSpaceTaken, wall } from '@/interfaces/OverworldMap'
+import { config, cameraPerson, isSpaceTaken, wall } from '@/types/OverworldMap'
 
 export default class OverworldMap {
   gameObjects: GameObject
