@@ -1,10 +1,11 @@
 import GameObject from '@/GameObject.js'
+import { DirectionUpdate } from '@/types/Person'
 export default class Person extends GameObject {
   movingProgressRemaining: number
   isPlayerControlled: boolean
-  directionUpdate: { up: (string | number)[]; down: (string | number)[]; left: (string | number)[]; right: (string | number)[] }
+  directionUpdate: DirectionUpdate
 
-  constructor(config: any) {
+  constructor(config) {
     super(config)
     this.movingProgressRemaining = 0
 

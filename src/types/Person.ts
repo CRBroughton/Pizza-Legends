@@ -7,8 +7,8 @@ export interface Config {
 }
 
 export interface DirectionUpdate {
-  up: [string, number]
-  down: [string, number]
-  left: [string, number]
-  right: [string, number]
+  up: (string | number)[]
+  down: (string | number)[]
+  left: (string | number)[]
+  right: (string | number)[]
 }
