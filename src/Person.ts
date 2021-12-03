@@ -19,30 +19,48 @@ export default class Person extends GameObject {
   }
 
   update(state: { key: string }) {
-    this.updatePosition()
-    this.updateSprite(state)
+    if (this.movingProgressRemaining > 0) {
+      this.updatePosition()
+    }
+    else {
+      // More cases for starting to walk will come here
 
-    if (this.isPlayerControlled && this.movingProgressRemaining === 0 && state.key) {
-      // Moves direction
-      this.direction = state.key
+      // Case: We're keyboard ready and have a arrow pressed
+      if (this.isPlayerControlled && state.key) {
+        this.startBehaviour(state, {
+          type: 'walk',
+          direction: state.key,
+        })
+      }
+      this.updateSprite(state)
+    }
+  }
+
+  // Moves direction
+  startBehaviour(state, behaviour) {
+    // setting character direction to behaviour state
+    this.direction = behaviour.direction
+    if (behaviour.type === 'walk') {
+      // stop here if space is not free
+      if (state.map.isSpaceTaken(this.x, this.y, this.direction))
+        return
+      // ready to walk
+      state.map.moveWall(this.x, this.y, this.direction)
       this.movingProgressRemaining = 16
     }
   }
 
   updatePosition() {
-    if (this.movingProgressRemaining > 0) {
-      const [property, change]: [string, number] = this.directionUpdate[this.direction]
-      this[property] += change
-      this.movingProgressRemaining -= 1
-    }
+    const [property, change]: [string, number] = this.directionUpdate[this.direction]
+    this[property] += change
+    this.movingProgressRemaining -= 1
   }
 
-  updateSprite(state) {
-    if (this.isPlayerControlled && this.movingProgressRemaining === 0 && !state.key) {
-      this.sprite.setAnimation(`idle-${this.direction}`)
+  updateSprite() {
+    if (this.movingProgressRemaining > 0) {
+      this.sprite.setAnimation(`walk-${this.direction}`)
       return
     }
-    if (this.movingProgressRemaining > 0)
-      this.sprite.setAnimation(`walk-${this.direction}`)
+    this.sprite.setAnimation(`idle-${this.direction}`)
   }
 }
