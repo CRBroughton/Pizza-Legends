@@ -1,12 +1,14 @@
-import { utils } from '@/utils.js'
+import { utils, nextPosition } from '@/utils.js'
 import GameObject from '@/GameObject.js'
 import Person from '@/Person.js'
+import { cameraPerson } from '@/interfaces/OverworldMap'
 
 export default class OverworldMap {
   gameObjects: GameObject
   lowerImage: HTMLImageElement
   upperImage: HTMLImageElement
-  constructor(config: { gameObjects: GameObject; lowerSrc: string; upperSrc: string }) {
+
+  constructor(config: { gameObjects: GameObject; walls: {}; lowerSrc: string; upperSrc: string }) {
     this.gameObjects = config.gameObjects
     this.walls = config.walls || {}
 
@@ -17,16 +19,16 @@ export default class OverworldMap {
     this.upperImage.src = config.upperSrc
   }
 
-  drawLowerImage(ctx: CanvasRenderingContext2D, cameraPerson) {
+  drawLowerImage(ctx: CanvasRenderingContext2D, cameraPerson: cameraPerson) {
     ctx.drawImage(this.lowerImage, utils.withGrid(10.5) - cameraPerson.x, utils.withGrid(6) - cameraPerson.y)
   }
 
-  drawUpperImage(ctx: CanvasRenderingContext2D, cameraPerson) {
+  drawUpperImage(ctx: CanvasRenderingContext2D, cameraPerson: cameraPerson) {
     ctx.drawImage(this.upperImage, utils.withGrid(10.5) - cameraPerson.x, utils.withGrid(6) - cameraPerson.y)
   }
 
   isSpaceTaken(currentX, currentY, direction) {
-    const { x, y } = utils.nextPosition(currentX, currentY, direction)
+    const { x, y } = nextPosition(currentX, currentY, direction)
     return this.walls[`${x},${y}`] || false
   }
 
@@ -47,7 +49,7 @@ export default class OverworldMap {
 
   moveWall(wasX, wasY, direction) {
     this.removeWall(wasX, wasY)
-    const { x, y } = utils.nextPosition(wasX, wasY, direction)
+    const { x, y } = nextPosition(wasX, wasY, direction)
     this.addWall(x, y)
   }
 }
