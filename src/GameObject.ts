@@ -1,10 +1,12 @@
 import Sprite from '@/Sprite.js'
+import { addWall } from '@/interfaces/GameObject'
 
 export default class GameObject {
   x: number
   y: number
   direction: string
   sprite: Sprite
+  isMounted: boolean
   constructor(config: { x: number; y: number; direction: string; src?: string }) {
     this.isMounted = false
     this.x = config.x || 0
@@ -16,7 +18,7 @@ export default class GameObject {
     })
   }
 
-  mount(map) {
+  mount(map: { addWall: addWall }) {
     this.isMounted = true
     map.addWall(this.x, this.y)
   }
