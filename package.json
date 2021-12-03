@@ -4,6 +4,7 @@
   "description": "",
   "main": ".eslintrc.js",
   "scripts": {
+    "serve": "npx tsc -w & npx tsc-alias -w & npx serve public",
     "typewatch": "npx tsc -w & npx tsc-alias -w",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix"
@@ -22,6 +23,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^0.11.1",
     "eslint": "^8.3.0",
+    "serve": "^13.0.2",
     "tsc-alias": "^1.4.2",
     "typescript": "^4.5.2"
   }
