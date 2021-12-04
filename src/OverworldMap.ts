@@ -8,6 +8,7 @@ export default class OverworldMap {
   lowerImage: HTMLImageElement
   upperImage: HTMLImageElement
   walls: {[key: string]: boolean}
+  isCutscenePlaying: boolean
 
   constructor(config: Config) {
     this.gameObjects = config.gameObjects
@@ -18,6 +19,8 @@ export default class OverworldMap {
 
     this.upperImage = new Image()
     this.upperImage.src = config.upperSrc
+
+    this.isCutscenePlaying = false
   }
 
   drawLowerImage(ctx: CanvasRenderingContext2D, cameraPerson: CameraPerson) {
@@ -34,7 +37,9 @@ export default class OverworldMap {
   }
 
   mountObjects() {
-    Object.values(this.gameObjects).forEach((object) => {
+    Object.keys(this.gameObjects).forEach((key) => {
+      const object = this.gameObjects[key]
+      object.id = key
       // TODO: determine if this object should actually mount
       object.mount(this)
     })
@@ -68,7 +73,27 @@ window.OverworldMaps = {
       npc1: new Person({
         x: utils.withGrid(7),
         y: utils.withGrid(9),
+        src: 'images/characters/people/npc1.png',
+        behaviourLoop: [
+          { type: 'stand', direction: 'left', time: 1000 },
+          { type: 'stand', direction: 'up', time: 800 },
+          { type: 'stand', direction: 'right', time: 1200 },
+          { type: 'stand', direction: 'up', time: 300 },
+        ],
+      }),
+      npc2: new Person({
+        x: utils.withGrid(3),
+        y: utils.withGrid(7),
         src: 'images/characters/people/npc2.png',
+        behaviourLoop: [
+          { type: 'walk', direction: 'left' },
+          { type: 'stand', direction: 'up', time: 1000 },
+          { type: 'walk', direction: 'up' },
+          { type: 'walk', direction: 'right' },
+          { type: 'stand', direction: 'down', time: 1700 },
+          { type: 'walk', direction: 'down' },
+
+        ],
       }),
     },
     walls: {
