@@ -1,5 +1,6 @@
 import Sprite from '@/Sprite.js'
 import { Config, AddWall } from '@/types/GameObject'
+import { CameraPerson } from '@/types/OverworldMap'
 
 export default class GameObject {
   x: number
@@ -7,6 +8,7 @@ export default class GameObject {
   direction: string
   sprite: Sprite
   isMounted: boolean
+  hero!: CameraPerson
   constructor(config: Config) {
     this.isMounted = false
     this.x = config.x || 0
