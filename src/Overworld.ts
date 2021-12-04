@@ -15,37 +15,67 @@ export default class Overworld {
     this.map = null!
   }
 
+  draw() {
+    // Clears the canvas
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+
+    // establish the camera person
+    const cameraPerson: CameraPerson = this.map.gameObjects.hero
+
+    // update all objects
+    Object.values(this.map.gameObjects).forEach((object) => {
+      object.update({
+        key: this.directionInput?.direction,
+        map: this.map,
+      })
+    })
+
+    // Draws map lower image
+    this.map.drawLowerImage(this.ctx, cameraPerson)
+
+    // Draws game objects
+    Object.values(this.map.gameObjects).sort((a, b) => {
+      // Reorders the image in the correct z-index (no overlapping)
+      return a.y - b.y
+    }).forEach((object) => {
+      object.sprite.draw(this.ctx, cameraPerson)
+    })
+    // Draws map upper image
+    this.map.drawUpperImage(this.ctx, cameraPerson)
+  }
+
   startGameLoop() {
+    const fps = 60
+    const fpsInterval = 1000 / fps
+    let frameCount = 0
+    let then = window.performance.now()
+    const startTime = then
+    console.log(startTime)
+
     const step = () => {
-      // Clears the canvas
-      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+      // this.draw()
+      requestAnimationFrame(step)
 
-      // establish the camera person
-      const cameraPerson: CameraPerson = this.map.gameObjects.hero
+      // calc elapsed time since last loop
 
-      // update all objects
-      Object.values(this.map.gameObjects).forEach((object) => {
-        object.update({
-          key: this.directionInput?.direction,
-          map: this.map,
-        })
-      })
+      const now = window.performance.now()
+      const elapsed = now - then
 
-      // Draws map lower image
-      this.map.drawLowerImage(this.ctx, cameraPerson)
+      // if enough time has elapsed, draw the next frame
 
-      // Draws game objects
-      Object.values(this.map.gameObjects).sort((a, b) => {
-        // Reorders the image in the correct z-index (no overlapping)
-        return a.y - b.y
-      }).forEach((object) => {
-        object.sprite.draw(this.ctx, cameraPerson)
-      })
-      // Draws map upper image
-      this.map.drawUpperImage(this.ctx, cameraPerson)
-      requestAnimationFrame(() => {
-        step()
-      })
+      if (elapsed > fpsInterval) {
+        // Get ready for next frame by setting then=now, but...
+        // Also, adjust for fpsInterval not being multiple of 16.67
+        then = now - (elapsed % fpsInterval)
+
+        // draw stuff here
+
+        this.draw()
+
+        // TESTING...Report #seconds since start and achieved fps.
+        const sinceStart = now - startTime
+        console.log(Math.round(1000 / (sinceStart / ++frameCount) * 100) / 100)
+      }
     }
     step()
   }
