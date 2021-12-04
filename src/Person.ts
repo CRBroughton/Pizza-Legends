@@ -28,7 +28,7 @@ export default class Person extends GameObject {
       // More cases for starting to walk will come here
 
       // Case: We're keyboard ready and have a arrow pressed
-      if (this.isPlayerControlled && state.key) {
+      if (!state.map.isCutscenePlaying && this.isPlayerControlled && state.key) {
         this.startBehaviour(state, {
           type: 'walk',
           direction: state.key,
