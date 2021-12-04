@@ -1,3 +1,4 @@
+import OverworldEvent from '@/OverworldEvent.js'
 import { utils, nextPosition } from '@/utils.js'
 import GameObject from '@/GameObject.js'
 import Person from '@/Person.js'
@@ -20,7 +21,7 @@ export default class OverworldMap {
     this.upperImage = new Image()
     this.upperImage.src = config.upperSrc
 
-    this.isCutscenePlaying = false
+    this.isCutscenePlaying = true
   }
 
   drawLowerImage(ctx: CanvasRenderingContext2D, cameraPerson: CameraPerson) {
@@ -43,6 +44,21 @@ export default class OverworldMap {
       // TODO: determine if this object should actually mount
       object.mount(this)
     })
+  }
+
+  async startCutscene(events) {
+    this.isCutscenePlaying = true
+
+    // start a loop of async events
+    for (let index = 0; index < events.length; index++) {
+      const eventHandler = new OverworldEvent({
+        event: events[index],
+        map: this,
+      })
+      await eventHandler.init()
+    }
+
+    this.isCutscenePlaying = false
   }
 
   addWall: Wall = (x, y) => {
