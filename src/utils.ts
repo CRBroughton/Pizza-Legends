@@ -11,6 +11,12 @@ export const utils = {
   asGridCoord(x: number, y: number) {
     return `${x * 16},${y * 16}`
   },
+  emitEvent(name, detail) {
+    const event = new CustomEvent(name, {
+      detail,
+    })
+    document.dispatchEvent(event)
+  },
 }
 
 export const nextPosition: Position = (initialX, initialY, direction) => {
