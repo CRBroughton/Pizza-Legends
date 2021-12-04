@@ -1,9 +1,16 @@
+interface behaviourLoop {
+  type: string
+  direction: string
+  time: number
+}
+
 export interface Config {
   isPlayerControlled?: boolean
   x?: number
   y?: number
   direction?: string
   src?: string | undefined
+  behaviourLoop?: behaviourLoop
 }
 
 export interface DirectionUpdate {
