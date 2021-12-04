@@ -45,36 +45,25 @@ export default class Overworld {
   }
 
   startGameLoop() {
-    const fps = 144
+    const fps = 60
     const fpsInterval = 1000 / fps
-    let frameCount = 0
     let then = window.performance.now()
-    const startTime = then
-    console.log(startTime)
 
     const step = () => {
-      // this.draw()
       requestAnimationFrame(step)
 
       // calc elapsed time since last loop
-
       const now = window.performance.now()
       const elapsed = now - then
 
       // if enough time has elapsed, draw the next frame
-
       if (elapsed > fpsInterval) {
         // Get ready for next frame by setting then=now, but...
         // Also, adjust for fpsInterval not being multiple of 16.67
         then = now - (elapsed % fpsInterval)
 
         // draw stuff here
-
         this.draw()
-
-        // TESTING...Report #seconds since start and achieved fps.
-        const sinceStart = now - startTime
-        console.log(Math.round(1000 / (sinceStart / ++frameCount) * 100) / 100)
       }
     }
     step()
