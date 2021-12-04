@@ -45,7 +45,7 @@ export default class Overworld {
   }
 
   startGameLoop() {
-    const fps = 60
+    const fps = 144
     const fpsInterval = 1000 / fps
     let frameCount = 0
     let then = window.performance.now()
