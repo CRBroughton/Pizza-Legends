@@ -1,5 +1,6 @@
 import DirectionInput from '@/DirectionInput.js'
 import OverworldMap from '@/OverworldMap.js'
+import { CameraPerson } from '@/types/OverworldMap'
 
 export default class Overworld {
   element: HTMLDivElement
@@ -11,7 +12,7 @@ export default class Overworld {
     this.element = config.element
     this.canvas = this.element.querySelector('.game-canvas')!
     this.ctx = this.canvas.getContext('2d')!
-    this.map = null
+    this.map = null!
   }
 
   startGameLoop() {
@@ -20,7 +21,7 @@ export default class Overworld {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
 
       // establish the camera person
-      const cameraPerson = this.map.gameObjects.hero
+      const cameraPerson: CameraPerson = this.map.gameObjects.hero
 
       // update all objects
       Object.values(this.map.gameObjects).forEach((object) => {
