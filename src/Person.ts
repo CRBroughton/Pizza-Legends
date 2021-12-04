@@ -1,11 +1,11 @@
 import GameObject from '@/GameObject.js'
-import { DirectionUpdate } from '@/types/Person'
+import { Config, DirectionUpdate, startBehaviour } from '@/types/Person'
 export default class Person extends GameObject {
   movingProgressRemaining: number
   isPlayerControlled: boolean
   directionUpdate: DirectionUpdate
 
-  constructor(config) {
+  constructor(config: Config) {
     super(config)
     this.movingProgressRemaining = 0
 
@@ -33,12 +33,12 @@ export default class Person extends GameObject {
           direction: state.key,
         })
       }
-      this.updateSprite(state)
+      this.updateSprite()
     }
   }
 
   // Moves direction
-  startBehaviour(state, behaviour) {
+  startBehaviour: startBehaviour = (state, behaviour) => {
     // setting character direction to behaviour state
     this.direction = behaviour.direction
     if (behaviour.type === 'walk') {
@@ -52,7 +52,7 @@ export default class Person extends GameObject {
   }
 
   updatePosition() {
-    const [property, change]: [string, number] = this.directionUpdate[this.direction]
+    const [property, change] = this.directionUpdate[this.direction]
     this[property] += change
     this.movingProgressRemaining -= 1
   }

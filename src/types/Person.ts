@@ -12,3 +12,8 @@ export interface DirectionUpdate {
   left: (string | number)[]
   right: (string | number)[]
 }
+
+export type startBehaviour = (
+  state: { key?: string; map?: any },
+  behaviour: { type: any; direction: any }
+) => void
