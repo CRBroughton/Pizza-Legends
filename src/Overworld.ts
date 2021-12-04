@@ -35,7 +35,10 @@ export default class Overworld {
       this.map.drawLowerImage(this.ctx, cameraPerson)
 
       // Draws game objects
-      Object.values(this.map.gameObjects).forEach((object) => {
+      Object.values(this.map.gameObjects).sort((a, b) => {
+        // Reorders the image in the correct z-index (no overlapping)
+        return a.y - b.y
+      }).forEach((object) => {
         object.sprite.draw(this.ctx, cameraPerson)
       })
       // Draws map upper image
