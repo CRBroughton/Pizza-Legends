@@ -70,7 +70,8 @@ export default class OverworldMap {
     const match = Object.values(this.gameObjects).find((object) => {
       return `${object.x},${object.y}` === `${nextCoords.x},${nextCoords.y}`
     })
-    console.log({ match })
+    if (!this.isCutscenePlaying && match && match.talking.length)
+      this.startCutscene(match.talking[0].events)
   }
 
   addWall: Wall = (x, y) => {
@@ -111,7 +112,7 @@ window.OverworldMaps = {
         talking: [
           {
             events: [
-              { type: 'textMessage', text: 'I\'m busy' },
+              { type: 'textMessage', text: 'I\'m busy', faceHero: 'npc1' },
               { type: 'textMessage', text: 'Go away!' },
             ],
           },
