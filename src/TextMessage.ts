@@ -17,6 +17,16 @@ export default class TextMessage {
         <p class="textMessage_p">${this.text}</p>
         <button class="TextMessage_button">Next</button>
     `)
+
+    this.element.querySelector('button').addEventListener('click', () => {
+      // Close the message box
+      this.done()
+    })
+  }
+
+  done() {
+    this.element.remove()
+    this.onComplete()
   }
 
   init(container: { appendChild: (arg0: HTMLDivElement | undefined) => void }) {
