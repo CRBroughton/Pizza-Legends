@@ -77,7 +77,14 @@ export default class Overworld {
     this.startGameLoop()
 
     this.map.startCutscene([
-      { type: 'textMessage', text: 'WHY HELLO THERE' },
+      { who: 'hero', type: 'walk', direction: 'down' },
+      { who: 'hero', type: 'walk', direction: 'down' },
+      { who: 'npc1', type: 'walk', direction: 'left' },
+      { who: 'npc1', type: 'walk', direction: 'left' },
+      { who: 'npc1', type: 'stand', direction: 'up' },
+      { type: 'textMessage', text: 'Why hello there!' },
+      { type: 'textMessage', text: 'This is a cinematic example' },
+      { type: 'textMessage', text: 'When this conversation ends, the cinematic will stop' },
     ])
 
     // this.map.startCutscene([
