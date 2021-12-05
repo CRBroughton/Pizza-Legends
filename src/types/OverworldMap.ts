@@ -1,6 +1,7 @@
 import GameObject from '@/GameObject.js'
 
 export interface Config {
+  cutsceneSpaces: {}
   gameObjects: GameObject
   walls: {}
   lowerSrc: string
@@ -8,6 +9,7 @@ export interface Config {
 }
 
 export interface CameraPerson {
+  direction(x: number, y: number, direction: any)
   x: number
   y: number
 }

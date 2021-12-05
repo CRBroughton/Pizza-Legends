@@ -24,6 +24,8 @@ export default class GameObject {
 
     this.behaviourLoop = config.behaviourLoop || false
     this.behaviourLoopIndex = 0
+
+    this.talking = config.talking || []
   }
 
   mount(map: { addWall: AddWall }) {
@@ -38,7 +40,7 @@ export default class GameObject {
 
   async doBehaviourEvent(map) {
     // Dont do anythign if there is a more important cutscene or I don't have config to do anything
-    if (map.isCutscenePlaying || this.behaviourLoop.length === 0)
+    if (map.isCutscenePlaying || this.behaviourLoop.length === 0 || this.isStanding)
       return
 
     // Setting up our event with relevent info

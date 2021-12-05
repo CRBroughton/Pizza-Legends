@@ -9,6 +9,7 @@ export default class Person extends GameObject {
   constructor(config: Config) {
     super(config)
     this.movingProgressRemaining = 0
+    this.isStanding = false
 
     this.isPlayerControlled = config.isPlayerControlled || false
 
@@ -57,8 +58,10 @@ export default class Person extends GameObject {
     }
 
     if (behaviour.type === 'stand') {
+      this.isStanding = true
       setTimeout(() => {
         utils.emitEvent('PersonStandComplete', { whoId: this.id })
+        this.isStanding = false
       }, behaviour.time)
     }
   }
