@@ -103,12 +103,12 @@ window.OverworldMaps = {
         x: utils.withGrid(7),
         y: utils.withGrid(9),
         src: 'images/characters/people/npc1.png',
-        behaviourLoop: [
-          { type: 'stand', direction: 'left', time: 1000 },
-          { type: 'stand', direction: 'up', time: 800 },
-          { type: 'stand', direction: 'right', time: 1200 },
-          { type: 'stand', direction: 'up', time: 300 },
-        ],
+        // behaviourLoop: [
+        //   { type: 'stand', direction: 'left', time: 1000 },
+        //   { type: 'stand', direction: 'up', time: 800 },
+        //   { type: 'stand', direction: 'right', time: 1200 },
+        //   { type: 'stand', direction: 'up', time: 300 },
+        // ],
         talking: [
           {
             events: [
@@ -119,18 +119,18 @@ window.OverworldMaps = {
         ],
       }),
       npc2: new Person({
-        x: utils.withGrid(3),
-        y: utils.withGrid(7),
+        x: utils.withGrid(8),
+        y: utils.withGrid(5),
         src: 'images/characters/people/npc2.png',
-        behaviourLoop: [
-          { type: 'walk', direction: 'left' },
-          { type: 'stand', direction: 'up', time: 1000 },
-          { type: 'walk', direction: 'up' },
-          { type: 'walk', direction: 'right' },
-          { type: 'stand', direction: 'down', time: 1700 },
-          { type: 'walk', direction: 'down' },
+        // behaviourLoop: [
+        //   { type: 'walk', direction: 'left' },
+        //   { type: 'stand', direction: 'up', time: 1000 },
+        //   { type: 'walk', direction: 'up' },
+        //   { type: 'walk', direction: 'right' },
+        //   { type: 'stand', direction: 'down', time: 1700 },
+        //   { type: 'walk', direction: 'down' },
 
-        ],
+        // ],
       }),
     },
     walls: {
