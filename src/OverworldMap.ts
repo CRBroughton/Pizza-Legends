@@ -13,6 +13,7 @@ export default class OverworldMap {
   cutsceneSpaces: any
 
   constructor(config: Config) {
+    this.overworld = null
     this.gameObjects = config.gameObjects
     this.cutsceneSpaces = config.cutsceneSpaces || {}
     this.walls = config.walls || {}
@@ -112,12 +113,12 @@ window.OverworldMaps = {
         x: utils.withGrid(7),
         y: utils.withGrid(9),
         src: 'images/characters/people/npc1.png',
-        // behaviourLoop: [
-        //   { type: 'stand', direction: 'left', time: 1000 },
-        //   { type: 'stand', direction: 'up', time: 800 },
-        //   { type: 'stand', direction: 'right', time: 1200 },
-        //   { type: 'stand', direction: 'up', time: 300 },
-        // ],
+        behaviourLoop: [
+          { type: 'stand', direction: 'left', time: 1000 },
+          { type: 'stand', direction: 'up', time: 800 },
+          { type: 'stand', direction: 'right', time: 1200 },
+          { type: 'stand', direction: 'up', time: 300 },
+        ],
         talking: [
           {
             events: [
@@ -131,15 +132,12 @@ window.OverworldMaps = {
         x: utils.withGrid(8),
         y: utils.withGrid(5),
         src: 'images/characters/people/npc2.png',
-        // behaviourLoop: [
-        //   { type: 'walk', direction: 'left' },
-        //   { type: 'stand', direction: 'up', time: 1000 },
-        //   { type: 'walk', direction: 'up' },
-        //   { type: 'walk', direction: 'right' },
-        //   { type: 'stand', direction: 'down', time: 1700 },
-        //   { type: 'walk', direction: 'down' },
-
-        // ],
+        behaviourLoop: [
+          { type: 'stand', direction: 'left', time: 1000 },
+          { type: 'stand', direction: 'down', time: 1200 },
+          { type: 'stand', direction: 'right', time: 500 },
+          { type: 'stand', direction: 'down', time: 800 },
+        ],
       }),
     },
     walls: {
@@ -167,7 +165,24 @@ window.OverworldMaps = {
           ],
         },
       ],
-
+      [utils.asGridCoord(5, 10)]: [
+        {
+          events: [
+            { type: 'changeMap', map: 'Kitchen' },
+          ],
+        },
+      ],
+    },
+  },
+  Kitchen: {
+    lowerSrc: 'images/maps/KitchenLower.png',
+    upperSrc: 'images/maps/KitchenUpper.png',
+    gameObjects: {
+      hero: new Person({
+        isPlayerControlled: true,
+        x: utils.withGrid(5),
+        y: utils.withGrid(9),
+      }),
     },
   },
 }
