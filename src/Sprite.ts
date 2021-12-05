@@ -1,6 +1,7 @@
 import { utils } from '@/utils.js'
 import GameObject from '@/GameObject.js'
-import { drawImage } from '@/interfaces/Sprite'
+import { DrawImage } from '@/types/Sprite'
+import { CameraPerson } from '@/types/OverworldMap'
 
 export default class Sprite {
   image: HTMLImageElement
@@ -9,7 +10,12 @@ export default class Sprite {
   isShadowsLoaded: boolean | undefined
   gameObject: GameObject
   shadow: HTMLImageElement
-  constructor(config: { gameObject: any; src: any; animations?: any; currentAnimation?: any }) {
+  currentAnimationFrame: number
+  animationFrameLimit: number
+  animationFrameProgress: number
+  animations: {[key: string]: (string | number)[]}
+  currentAnimation: string
+  constructor(config) {
     // Set up the image
     this.image = new Image()
     this.image.src = config.src
@@ -48,12 +54,12 @@ export default class Sprite {
     this.gameObject = config.gameObject
   }
 
-  get frame() {
+  get frame(): string | number {
     return this.animations[this.currentAnimation][this.currentAnimationFrame]
   }
 
-  setAnimation(key) {
-    if (this.currentAnimation != key) {
+  setAnimation(key: string) {
+    if (this.currentAnimation !== key) {
       this.currentAnimation = key
       this.currentAnimationFrame = 0
       this.animationFrameProgress = this.animationFrameLimit
@@ -75,7 +81,7 @@ export default class Sprite {
       this.currentAnimationFrame = 0
   }
 
-  draw(ctx: { drawImage: drawImage}, cameraPerson) {
+  draw(ctx: { drawImage: DrawImage}, cameraPerson: CameraPerson) {
     const x = this.gameObject.x - 8 + utils.withGrid(10.5) - cameraPerson.x
     const y = this.gameObject.y - 18 + utils.withGrid(6) - cameraPerson.y
 

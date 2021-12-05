@@ -1,4 +1,4 @@
-export type drawImage = (
+export type DrawImage = (
   image: HTMLImageElement,
   sx: number,
   sy: number,

@@ -1,12 +1,17 @@
-import { utils } from '@/utils.js'
+import OverworldEvent from '@/OverworldEvent.js'
+import { utils, nextPosition } from '@/utils.js'
 import GameObject from '@/GameObject.js'
 import Person from '@/Person.js'
+import { Config, CameraPerson, IsSpaceTaken, Wall } from '@/types/OverworldMap'
 
 export default class OverworldMap {
   gameObjects: GameObject
   lowerImage: HTMLImageElement
   upperImage: HTMLImageElement
-  constructor(config: { gameObjects: GameObject; lowerSrc: string; upperSrc: string }) {
+  walls: {[key: string]: boolean}
+  isCutscenePlaying: boolean
+
+  constructor(config: Config) {
     this.gameObjects = config.gameObjects
     this.walls = config.walls || {}
 
@@ -15,39 +20,58 @@ export default class OverworldMap {
 
     this.upperImage = new Image()
     this.upperImage.src = config.upperSrc
+
+    this.isCutscenePlaying = true
   }
 
-  drawLowerImage(ctx: CanvasRenderingContext2D, cameraPerson) {
+  drawLowerImage(ctx: CanvasRenderingContext2D, cameraPerson: CameraPerson) {
     ctx.drawImage(this.lowerImage, utils.withGrid(10.5) - cameraPerson.x, utils.withGrid(6) - cameraPerson.y)
   }
 
-  drawUpperImage(ctx: CanvasRenderingContext2D, cameraPerson) {
+  drawUpperImage(ctx: CanvasRenderingContext2D, cameraPerson: CameraPerson) {
     ctx.drawImage(this.upperImage, utils.withGrid(10.5) - cameraPerson.x, utils.withGrid(6) - cameraPerson.y)
   }
 
-  isSpaceTaken(currentX, currentY, direction) {
-    const { x, y } = utils.nextPosition(currentX, currentY, direction)
+  isSpaceTaken: IsSpaceTaken = (currentX, currentY, direction) => {
+    const { x, y } = nextPosition(currentX, currentY, direction)
     return this.walls[`${x},${y}`] || false
   }
 
   mountObjects() {
-    Object.values(this.gameObjects).forEach((object) => {
+    Object.keys(this.gameObjects).forEach((key) => {
+      const object = this.gameObjects[key]
+      object.id = key
       // TODO: determine if this object should actually mount
       object.mount(this)
     })
   }
 
-  addWall(x, y) {
+  async startCutscene(events) {
+    this.isCutscenePlaying = true
+
+    // start a loop of async events
+    for (let index = 0; index < events.length; index++) {
+      const eventHandler = new OverworldEvent({
+        event: events[index],
+        map: this,
+      })
+      await eventHandler.init()
+    }
+
+    this.isCutscenePlaying = false
+  }
+
+  addWall: Wall = (x, y) => {
     this.walls[`${x},${y}`] = true
   }
 
-  removeWall(x, y) {
+  removeWall: Wall = (x, y) => {
     delete this.walls[`${x},${y}`]
   }
 
-  moveWall(wasX, wasY, direction) {
+  moveWall: Wall = (wasX, wasY, direction) => {
     this.removeWall(wasX, wasY)
-    const { x, y } = utils.nextPosition(wasX, wasY, direction)
+    const { x, y } = nextPosition(wasX, wasY, direction)
     this.addWall(x, y)
   }
 }
@@ -65,7 +89,27 @@ window.OverworldMaps = {
       npc1: new Person({
         x: utils.withGrid(7),
         y: utils.withGrid(9),
+        src: 'images/characters/people/npc1.png',
+        behaviourLoop: [
+          { type: 'stand', direction: 'left', time: 1000 },
+          { type: 'stand', direction: 'up', time: 800 },
+          { type: 'stand', direction: 'right', time: 1200 },
+          { type: 'stand', direction: 'up', time: 300 },
+        ],
+      }),
+      npc2: new Person({
+        x: utils.withGrid(3),
+        y: utils.withGrid(7),
         src: 'images/characters/people/npc2.png',
+        behaviourLoop: [
+          { type: 'walk', direction: 'left' },
+          { type: 'stand', direction: 'up', time: 1000 },
+          { type: 'walk', direction: 'up' },
+          { type: 'walk', direction: 'right' },
+          { type: 'stand', direction: 'down', time: 1700 },
+          { type: 'walk', direction: 'down' },
+
+        ],
       }),
     },
     walls: {
