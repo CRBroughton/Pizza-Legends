@@ -79,7 +79,8 @@ export default class OverworldMap {
   checkForFootstepCutscene() {
     const hero = this.gameObjects.hero
     const match = this.cutsceneSpaces[`${hero.x},${hero.y}`]
-    console.log({ match })
+    if (!this.isCutscenePlaying && match)
+      this.startCutscene(match[0].events)
   }
 
   addWall: Wall = (x, y) => {
