@@ -182,7 +182,27 @@ window.OverworldMaps = {
         isPlayerControlled: true,
         x: utils.withGrid(5),
         y: utils.withGrid(9),
+
       }),
+    },
+    cutsceneSpaces: {
+      [
+      utils.asGridCoord(5, 10)]: [
+        {
+          events: [
+
+            { who: 'hero', type: 'stand', direction: 'up' },
+
+          ],
+        },
+      ],
+      [utils.asGridCoord(5, 10)]: [
+        {
+          events: [
+            { type: 'changeMap', map: 'DemoRoom' },
+          ],
+        },
+      ],
     },
   },
 }
