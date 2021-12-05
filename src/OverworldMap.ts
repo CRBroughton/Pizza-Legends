@@ -21,7 +21,7 @@ export default class OverworldMap {
     this.upperImage = new Image()
     this.upperImage.src = config.upperSrc
 
-    this.isCutscenePlaying = true
+    this.isCutscenePlaying = false
   }
 
   drawLowerImage(ctx: CanvasRenderingContext2D, cameraPerson: CameraPerson) {
@@ -62,6 +62,15 @@ export default class OverworldMap {
 
     // Reset NPCS to do idle behaviour
     Object.values(this.gameObjects).forEach(object => object.doBehaviourEvent(this))
+  }
+
+  checkForActionCutscene() {
+    const hero = this.gameObjects.hero
+    const nextCoords = nextPosition(hero.x, hero.y, hero.direction)
+    const match = Object.values(this.gameObjects).find((object) => {
+      return `${object.x},${object.y}` === `${nextCoords.x},${nextCoords.y}`
+    })
+    console.log({ match })
   }
 
   addWall: Wall = (x, y) => {
