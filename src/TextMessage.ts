@@ -1,3 +1,5 @@
+import KeyPressListener from '@/KeyPressListener.js'
+
 export default class TextMessage {
   text: string
   onComplete: any
@@ -20,6 +22,11 @@ export default class TextMessage {
 
     this.element.querySelector('button').addEventListener('click', () => {
       // Close the message box
+      this.done()
+    })
+
+    this.actionListener = new KeyPressListener('Enter', () => {
+      this.actionListener.unbind()
       this.done()
     })
   }
