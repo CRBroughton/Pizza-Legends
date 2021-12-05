@@ -77,11 +77,21 @@ export default class Overworld {
     })
   }
 
+  bindHeroPositionCheck() {
+    document.addEventListener('PersonWalkingComplete', (e) => {
+      if (e.detail.whoId === 'hero') {
+        // Hero position has changed
+        this.map.checkForFootstepCutscene()
+      }
+    })
+  }
+
   init() {
     this.map = new OverworldMap(window.OverworldMaps.DemoRoom)
     this.map.mountObjects()
 
     this.bindActionInput()
+    this.bindHeroPositionCheck()
 
     this.directionInput = new DirectionInput()
     this.directionInput.init()

@@ -10,9 +10,11 @@ export default class OverworldMap {
   upperImage: HTMLImageElement
   walls: {[key: string]: boolean}
   isCutscenePlaying: boolean
+  cutsceneSpaces: any
 
   constructor(config: Config) {
     this.gameObjects = config.gameObjects
+    this.cutsceneSpaces = config.cutsceneSpaces || {}
     this.walls = config.walls || {}
 
     this.lowerImage = new Image()
@@ -72,6 +74,12 @@ export default class OverworldMap {
     })
     if (!this.isCutscenePlaying && match && match.talking.length)
       this.startCutscene(match.talking[0].events)
+  }
+
+  checkForFootstepCutscene() {
+    const hero = this.gameObjects.hero
+    const match = this.cutsceneSpaces[`${hero.x},${hero.y}`]
+    console.log({ match })
   }
 
   addWall: Wall = (x, y) => {
@@ -138,6 +146,27 @@ window.OverworldMaps = {
       [utils.asGridCoord(8, 6)]: true,
       [utils.asGridCoord(7, 7)]: true,
       [utils.asGridCoord(8, 7)]: true,
+    },
+    cutsceneSpaces: {
+      [
+      utils.asGridCoord(7, 4)]: [
+        {
+          events: [
+            { who: 'npc2', type: 'walk', direction: 'left' },
+            { who: 'npc2', type: 'stand', direction: 'up', time: 500 },
+
+            { type: 'textMessage', text: 'You can\'t be in there!' },
+
+            { who: 'npc2', type: 'walk', direction: 'right' },
+            { who: 'npc2', type: 'stand', direction: 'down' },
+
+            { who: 'hero', type: 'walk', direction: 'down' },
+            { who: 'hero', type: 'walk', direction: 'left' },
+
+          ],
+        },
+      ],
+
     },
   },
 }
