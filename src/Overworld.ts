@@ -1,3 +1,4 @@
+import KeyPressListener from '@/KeyPressListener.js'
 import DirectionInput from '@/DirectionInput.js'
 import OverworldMap from '@/OverworldMap.js'
 import { CameraPerson } from '@/types/OverworldMap'
@@ -69,23 +70,33 @@ export default class Overworld {
     step()
   }
 
+  bindActionInput() {
+    new KeyPressListener('Enter', () => {
+      // Is there a person here to talk to?
+      this.map.checkForActionCutscene()
+    })
+  }
+
   init() {
     this.map = new OverworldMap(window.OverworldMaps.DemoRoom)
     this.map.mountObjects()
+
+    this.bindActionInput()
+
     this.directionInput = new DirectionInput()
     this.directionInput.init()
     this.startGameLoop()
 
-    this.map.startCutscene([
-      { who: 'hero', type: 'walk', direction: 'down' },
-      { who: 'hero', type: 'walk', direction: 'down' },
-      { who: 'npc1', type: 'walk', direction: 'left' },
-      { who: 'npc1', type: 'walk', direction: 'left' },
-      { who: 'npc1', type: 'stand', direction: 'up' },
-      { type: 'textMessage', text: 'Why hello there!' },
-      { type: 'textMessage', text: 'This is a cinematic example' },
-      { type: 'textMessage', text: 'When this conversation ends, the cinematic will stop' },
-    ])
+    // this.map.startCutscene([
+    //   { who: 'hero', type: 'walk', direction: 'down' },
+    //   { who: 'hero', type: 'walk', direction: 'down' },
+    //   { who: 'npc1', type: 'walk', direction: 'left' },
+    //   { who: 'npc1', type: 'walk', direction: 'left' },
+    //   { who: 'npc1', type: 'stand', direction: 'up' },
+    //   { type: 'textMessage', text: 'Why hello there!' },
+    //   { type: 'textMessage', text: 'This is a cinematic example' },
+    //   { type: 'textMessage', text: 'When this conversation ends, the cinematic will stop' },
+    // ])
 
     // this.map.startCutscene([
     //   { who: 'hero', type: 'walk', direction: 'down' },
