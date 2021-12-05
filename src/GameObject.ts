@@ -24,6 +24,8 @@ export default class GameObject {
 
     this.behaviourLoop = config.behaviourLoop || false
     this.behaviourLoopIndex = 0
+
+    this.talking = config.talking || []
   }
 
   mount(map: { addWall: AddWall }) {
