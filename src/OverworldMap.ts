@@ -59,6 +59,9 @@ export default class OverworldMap {
     }
 
     this.isCutscenePlaying = false
+
+    // Reset NPCS to do idle behaviour
+    Object.values(this.gameObjects).forEach(object => object.doBehaviourEvent(this))
   }
 
   addWall: Wall = (x, y) => {
